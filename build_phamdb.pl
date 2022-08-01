@@ -1,6 +1,7 @@
 #!/usr/bin/perl -w
 use strict;
 use warnings;
+use File::Fetch;
 
 #get pham files
 mkdir("pham_fastas");
@@ -8,7 +9,7 @@ system("wget http://databases.hatfull.org/Actino_Draft/fastas.zip");
 system("unzip fastas.zip -d pham_fastas");
 
 #combine pham files
-my @fastafiles = glob"pham_fastas/*.fasta";
+my @fastafiles = glob"pham_fastas/fastas/*.fasta";
 open(OUT, "+> allphams.faa");
 foreach my $infile (@fastafiles){
   my($pham)=($infile=~/(.*?)\_.*/);
