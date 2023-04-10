@@ -8,7 +8,6 @@ Code for easily making local version of the phagesDB protein database, but with 
     
 ## Usage  
 
-
-  -perl build_phamdb.pl
+    -perl build_phamdb.pl
   
   
