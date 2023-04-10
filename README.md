@@ -7,7 +7,7 @@ Code for easily making local version of the phagesDB protein database, but with 
     -perl v5 and up
     
 ## Usage  
-  
+
   -perl build_phamdb.pl
   
   
