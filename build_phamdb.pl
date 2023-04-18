@@ -5,8 +5,6 @@ use File::Fetch;
 
 #IMPORTANT: Needs BLAST loaded in order to run.
 
-#get pham files
-
 MAIN();
 
 sub MAIN{
@@ -88,6 +86,7 @@ sub GET_METADATA{
 sub APPLY_METADATA{
   my $hash_ref = shift;
   my %metadata = %{$hash_ref};
+  my $counter = 0;
   #apply pham numbers to database
   open(OUT, "+> temp.txt");
   open(PHAM, "< allphams.faa");
@@ -101,6 +100,7 @@ sub APPLY_METADATA{
       else{
         print OUT "$_"." $metadata{$pham}\t$counter\n";
       }
+      $counter++;
     }
     else{
       print OUT $_;
