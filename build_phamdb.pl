@@ -36,6 +36,8 @@ sub COMBINE_PHAMS{
       chomp;
       if($_=~/\>/){
         my($phage,$cluster)=($_=~/\>(.*?)\ .*?\[cluster\=(.*?)\].*/);
+        $phage = REMOVE_SPECIAL_CHARACTERS($phage);
+        $cluster = REMOVE_SPECIAL_CHARACTERS($cluster);
         print OUT ">$phage $cluster $pham\n";
       }
       else{
@@ -74,6 +76,7 @@ sub GET_METADATA{
       $product=~s/b"//g;
       $product=~s/b'//g;
       $product=~s/'//g;
+      $product = REMOVE_SPECIAL_CHARACTERS($product);
       $products{$pham}=$product;
       last;
     }
@@ -93,10 +96,10 @@ sub APPLY_METADATA{
       chomp;
       my($pham)=($_=~/\>.*?\ .*?\ (.*)/);
       if(!exists $metadata{$pham} || !defined $metadata{$pham}){
-        print OUT "$_"." product_unkown\n"
+        print OUT "$_"." product_unkown\t$counter\n"
       }
       else{
-        print OUT "$_"." $metadata{$pham}\n";
+        print OUT "$_"." $metadata{$pham}\t$counter\n";
       }
     }
     else{
@@ -109,6 +112,11 @@ sub APPLY_METADATA{
   rename "temp.txt", "allphams.faa";
 }
 
+sub REMOVE_SPECIAL_CHARACTERS{
+  my $input_string = shift;
+  $input_string=~s/[\|\ \[\]\(\)\:\;\/\.\-\~\`\!\@\#\$\%\^\&\*\=\+\{\}\?]/\_/g;
+  return($input_string);
+}
 
 sub BLAST_DB{
   #make blastdatabse
