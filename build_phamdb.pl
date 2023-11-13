@@ -95,10 +95,10 @@ sub APPLY_METADATA{
       chomp;
       my($phage,$cluster,$pham)=($_=~/\>(.*?)\ (.*?)\ (.*)/);
       if(!exists $metadata{$pham} || !defined $metadata{$pham}){
-        print OUT ">$phage\_uniqueID_$counter\ $cluster\ $pham\ "." product_unkown\n"
+        print OUT ">$phage\_UID\_$counter\ $cluster\ $pham\ "." product_unkown\n"
       }
       else{
-        print OUT ">$phage\_uniqueID_$counter\ $cluster\ $pham\ "." $metadata{$pham}\t$counter\n";
+        print OUT ">$phage\_UID\_$counter\ $cluster\ $pham\ "." $metadata{$pham}\t$counter\n";
       }
       $counter++;
     }
